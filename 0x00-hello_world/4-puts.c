@@ -19,3 +19,9 @@
 int main(void)
 
 {
+
+	printf(&quot;with proper grammar, but the outcome is a piece of art,\n&quot;);
+
+	return (0);
+
+}
