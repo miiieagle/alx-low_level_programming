@@ -1,12 +1,11 @@
-#include<stdio.h>
+#include <stdio.h>
 /**
- * Description: main - Prints out a string to stdout.
- * Return: 0 if success.
+ * main - Prints "with proper grammar, but the outcome is
+ * a piece of art," followed by a new line.
+ * Return: Always 0.
  */
 int main(void)
 {
-	char Mystr[] = "with proper grammar, but the outcome is a piece of art,";
-
-	printf(Mystr);
+	printf("with proper grammar, but the outcome is a piece of art,\n");
 	return (0);
 }
