@@ -1,27 +1,12 @@
-#include &lt;stdio.h&gt;
-
-
-
+#include<stdio.h>
 /**
- *
- * * main - print the string in the put function
- *
- * *
- *
- * * Description: using the main function
- *
- * * this program prints &quot;Programming is like building a multilingual puzzle
- *
- * * Return: 0
- *
- * */
-
+ * Description: main - Prints out a string to stdout.
+ * Return: 0 if success.
+ */
 int main(void)
-
 {
+	char Mystr[] = "\"Programming is like building a multilingual puzzle";
 
-	printf(&quot;with proper grammar, but the outcome is a piece of art,\n&quot;);
-
+	puts(Mystr);
 	return (0);
-
 }
