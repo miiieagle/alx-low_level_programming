@@ -1,4 +1,4 @@
-nclude "main.h"
+#include "main.h"
 /**
  * _islower - Entry point
  * Description: checks is a character is lowercase
