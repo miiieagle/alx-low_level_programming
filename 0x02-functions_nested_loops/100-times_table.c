@@ -30,7 +30,7 @@ void print_times_table(int n)
 						_putchar(',');
 						_putchar(32);
 						_putchar(32);
-						putchar(32);
+						_putchar(32);
 					}
 					_putchar(z + '0');
 				}
