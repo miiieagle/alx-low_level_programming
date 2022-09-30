@@ -1,0 +1,21 @@
+!<arch>
+0-isupper.o/    0           0     0     644     0         `
+0-memset.o/     0           0     0     644     0         `
+0-strcat.o/     0           0     0     644     0         `
+100-atoi.o/     0           0     0     644     0         `
+1-isdigit.o/    0           0     0     644     0         `
+1-memcpy.o/     0           0     0     644     0         `
+1-strncat.o/    0           0     0     644     0         `
+2-strchr.o/     0           0     0     644     0         `
+2-strlen.o/     0           0     0     644     0         `
+2-strncpy.o/    0           0     0     644     0         `
+3-islower.o/    0           0     0     644     0         `
+3-puts.o/       0           0     0     644     0         `
+3-strcmp.o/     0           0     0     644     0         `
+3-strspn.o/     0           0     0     644     0         `
+4-isalpha.o/    0           0     0     644     0         `
+4-strpbrk.o/    0           0     0     644     0         `
+5-strstr.o/     0           0     0     644     0         `
+6-abs.o/        0           0     0     644     0         `
+9-strcpy.o/     0           0     0     644     0         `
+_putchar.o/     0           0     0     644     0         `
