@@ -104,7 +104,7 @@ int print_words(int *pos, char **m, char *str, int words)
 		for (l = 0; l < sz - 1; l++, p1++)
 			*(*(m + b) + l) = *(str + p1);
 		*(*(m + b) + l) = '\0';
-			b1 = b1 + 2;
+		b1 = b1 + 2;
 	}
 	*(m + b) = NULL;
 	return (0);
