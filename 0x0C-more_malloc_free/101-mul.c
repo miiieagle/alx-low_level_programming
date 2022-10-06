@@ -1,161 +1,152 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "main.h"
-void populateResult(char *dest, char *n1, int n1_len, char *n2, int n2_len);
-int getLengthOfNum(char *str);
-void print_result(char *src, int length);
+#include <stdlib.h>
+
 /**
- * main - entry point, multiplies two numbers
- * @argc: integer, length of @argv
- * @argv: one-dimensional array of strings, arguments of this program
- * Return: 0, success
- */
-int main(int argc, char *argv[])
+ * _atoi_digit - convert a char to integer.
+ * @x: character to convert.
+ * Return: integer.
+ **/
+int _atoi_digit(char x)
 {
-	int num1_length, num2_length;
-	char *result;
+	unsigned int res;
 
-	if (argc != 3)
-	{
-		printf("Error\n");
-		exit(98);
-	}
+	if (x <= '9' && x >= '0')
+		res = x - '0';
+	return (res);
+}
 
-	num1_length = getLengthOfNum(argv[1]);
+/**
+ * _isNumber - Define if a string is a number.
+ * @argv: Pointer to string.
+ * Return: success (0).
+ **/
 
-	if (!num1_length)
-	{
-		printf("Error\n");
-		exit(98);
-	}
+int _isNumber(char *argv)
+{
+	int i;
 
-	num2_length = getLengthOfNum(argv[2]);
-
-	if (!num2_length)
-	{
-		printf("Error\n");
-		exit(98);
-	}
-
-	result = malloc(num1_length + num2_length);
-
-	if (!result)
-		return (1);
-
-	populateResult(result, argv[1], num1_length, argv[2], num2_length);
-
-	print_result(result, num1_length + num2_length);
-	printf("\n");
-	free(result);
-
+	for (i = 0; argv[i]; i++)
+		if (argv[i] < 48 || argv[i] > 57)
+			return (1);
 	return (0);
 }
 
 /**
- * getLengthOfNum - length of numbers in a string
- * @str: pointer to string of numbers
- * Return: integer (SUCCESS) or
- * NULL, if string includes char
- */
-int getLengthOfNum(char *str)
+ * _calloc - allocate array of size * nmemb.
+ * @nmemb: number of elements.
+ * @size: size of element.
+ * Return: pointer to array.
+ **/
+
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	char *tab;
+	unsigned int i;
+
+	tab = malloc(size * nmemb);
+
+	if (tab == NULL)
+		return (NULL);
+
+	for (i = 0; i < (size * nmemb); i++)
+		tab[i] = '0';
+
+	return (tab);
+}
+
+/**
+ * mul_array - multiply two arrays.
+ * @a1: first array.
+ * @len1: length of array a1.
+ * @a2:  char.
+ * @a3: array for result.
+ * @lena: length of array a3.
+ * Return: pointer to array.
+ **/
+
+void *mul_array(char *a1, int len1, char a2, char *a3, int lena)
+{
+	int mul = 0, i, k;
+
+	k = lena;
+	for (i = len1 - 1; i >= 0 ; i--)
+	{
+		mul += (a1[i] - '0') * (a2 - '0') + (a3[k] - '0');
+		a3[k] = (mul % 10) + '0';
+		mul /= 10;
+		k--;
+	}
+
+	while (mul != 0)
+	{
+		mul += a3[k] - '0';
+		a3[k] = (mul % 10) + '0';
+		mul /= 10;
+		k--;
+	}
+
+	return (a3);
+}
+/**
+ * print_array - print all digits of array.
+ * @nb: number of elements to print.
+ * @a: array of elements.
+ **/
+
+void print_array(char *a, int nb)
 {
 	int i = 0;
 
-	while (str[i])
+	while (a[i] == '0' && (i + 1) < nb)
 	{
-		if (str[i] >= '0' && str[i] <= '9')
-			i++;
-		else
-			return ('\0');
-	}
 
-	return (i);
+		i++;
+	}
+	for (; i < nb; i++)
+	{
+		_putchar(a[i]);
+	}
+	_putchar('\n');
 }
 
 /**
- * populateResult - multiplies two numbers stored as string
- * and stores result in @dest
- * @dest: pointer to where @num1 * @num2 should be stored
- * @n1: positive number stored as string in an array
- * @n2: positive number stored as string in an array
- * @n1_len: length of @n1
- * @n2_len: length of @n2
+ * main - print the multiplication of 2 numbers.
+ * @argc: array length.
+ * @argv: array.
+ * Return: 0.
  */
-void populateResult(char *dest, char *n1, int n1_len, char *n2, int n2_len)
+int main(int argc, char *argv[])
 {
-	int i, j, k, temp_value, non_carry_value;
-	int carry_value = 0;
-	char *multiplicand, *multiplier;
+	int i, c, len1, len2, lenres;
+	char E[6] = {'E', 'r', 'r', 'o', 'r', '\n'};
+	char *tabres;
 
-	if (n1_len > n2_len)
+	if (argc != 3 || _isNumber(argv[1]) == 1 || _isNumber(argv[2]) == 1)
 	{
-		i = n1_len - 1;
-		j = n2_len - 1;
-		multiplicand = n1;
-		multiplier = n2;
-	}
-	else
-	{
-		i = n2_len - 1;
-		j = n1_len - 1;
-		multiplicand = n2;
-		multiplier = n1;
-	}
-	while (i >= 0)
-	{
-		k = i;
-
-		while (k >= 0)
+		for (i = 0; i < 6; i++)
 		{
-			temp_value = ((multiplicand[k] - '0') * (multiplier[j] - '0'));
-			temp_value += carry_value;
-
-			if (j + 1 <= n2_len - 1 && dest[k + j + 1] >= '0' && dest[k + j + 1] <= '9')
-				temp_value += dest[k + j + 1] - '0';
-
-			if (temp_value < 10)
-			{
-				non_carry_value = temp_value;
-				carry_value = 0;
-			}
-			else
-			{
-				non_carry_value = temp_value % 10;
-				carry_value = temp_value / 10;
-			}
-
-			dest[k + j + 1] = non_carry_value + '0';
-			k--;
+			_putchar(E[i]);
 		}
-
-		if (carry_value)
-			dest[k + j + 1] = carry_value + '0';
-
-		carry_value = 0;
-
-		if (j > 0)
-			j--;
-		else
-			i = -1;
+		exit(98);
 	}
-
-	free(dest);
-	free(multiplicand);
-	free(multiplier);
-}
-
-/**
- * print_result - prints numbers stored as string in a memory location
- * @src: pointer to memory that stores numbers as strings
- * @length: length of @src
- */
-void print_result(char *src, int length)
-{
-	int i;
-
-	for (i = 0; i < length; i++)
+	for (len1 = 0; argv[1][len1]; len1++)
+		;
+	for (len2 = 0; argv[2][len2]; len2++)
+		;
+	lenres = len1 + len2;
+	tabres = _calloc(lenres, sizeof(int));
+	if (tabres == NULL)
 	{
-		if (src[i] >= '0' && src[i] <= '9')
-		printf("%c", src[i]);
+		free(tabres);
+		free(tabres);
 	}
+	for (i = len2 - 1, c = 0; i >= 0; i--)
+	{
+		tabres = mul_array(argv[1], len1, argv[2][i], tabres, (lenres - 1 - c));
+		c++;
+	}
+	print_array(tabres, lenres);
+	free(tabres);
+	exit(EXIT_SUCCESS);
+	return (0);
 }
